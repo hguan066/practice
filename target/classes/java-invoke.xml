@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:java="http://www.mulesoft.org/schema/mule/java"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="46f1744d-81fc-4a5e-bb8a-6671f042c0b2" >
+		<http:listener-connection host="0.0.0.0" port="8021" />
+	</http:listener-config>
+	<flow name="java-invokeFlow" doc:id="83f0c1cb-cc12-463d-b7ae-c3c4ddca8587" >
+		<http:listener doc:name="Listener" doc:id="3e5973d4-3948-4943-ba92-7f215cc7cd26" config-ref="HTTP_Listener_config" path="/invoke"/>
+		<java:invoke-static doc:name="Invoke static" doc:id="56b10445-181a-4733-b850-2af3b084b887" class="files.deleteLine" method="delLine(String, String)">
+			<java:args ><![CDATA[#[{fileInpath:payload.fileInpath,fileOutpath:payload.fileOutpath}]]]></java:args>
+		</java:invoke-static>
+		<set-payload value="first line is removed" doc:name="Set Payload" doc:id="9e19c634-d9a9-4d3a-990e-a5978793d1dc" />
+	</flow>
+</mule>
