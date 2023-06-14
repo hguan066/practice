@@ -35,7 +35,7 @@
 				      <muleVersion>4.4.0</muleVersion>
 				      <username>hguan067</username>
 				      <password>Haoyjhm1726**</password>
-				      <applicationName>com-op</applicationName>
+				      <applicationName>java-com-howard</applicationName>
 				      <environment>Sandbox</environment>
 				      <workers>1</workers>
 				      <workerType>MICRO</workerType>
